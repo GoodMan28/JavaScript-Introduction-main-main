@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text"></input>
+    <button onclick="addTodo()">Add Todo</button>
+
+    <ol>
+        <!-- Here we will put all our todos -->
+    </ol>
+</body>
+<script>
+    // Here what we will do is
+    // declare a global empty array that is known as todo
+    // addTodo() function pushes the text from the input to the array, todo 
+    // and render() the screen that is, updates the ui with the updated task
+
+    // deleteTodo() deletes the task of any identification from todos and again renders the screen
+
+    // that means that the render function renders all the todos on the screen
+
+    let todos = [];
+    function addTodo() {
+        let text = document.querySelector("input").value;
+        todos.push(text);
+        render();
+    }
+
+    function deleteTodo(index) {
+        // delete the elements and then render
+        todos.splice(index, 1);
+        render();
+    }
+
+    function render() {
+        // we will select the place where we need to render the todos
+        let ordLi = document.querySelector("ol");
+        // clearing the previous input of the ol
+        ordLi.innerHTML = "";
+        // alert("Clear Screen called");
+        // Looping through all of the todos element and indiv all the buttons and spans
+        for(let i = 0; i < todos.length; i++) {
+            // creating an 'li' for the todo
+            let listEl = document.createElement("li");
+            // now we will create a span element and a button element and append to the listEl
+            let spanEl = document.createElement("span");
+            let buttonEl = document.createElement("button");
+            buttonEl.setAttribute("onclick", `deleteTodo(${i})`)
+            spanEl.innerHTML = todos[i];
+            buttonEl.innerHTML = "Delete";
+
+            // appending these elements to the list Element
+            listEl.appendChild(spanEl);
+            listEl.appendChild(buttonEl);
+            listEl.setAttribute("id", `todo-${i}`);
+            // appending the list Element to the ordered list now
+            ordLi.appendChild(listEl);
+        }
+    }
+</script>
+</html>

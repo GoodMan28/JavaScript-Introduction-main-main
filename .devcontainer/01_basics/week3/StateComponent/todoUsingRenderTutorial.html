@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text"></input>
+    <button onclick="addTodo()">Add Todo</button>
+
+    <div id="topDiv">
+        <!-- Here we will insert each task -->
+    </div>                                                                  
+</body>
+<script>
+    let todos = [];
+    function addTodo() {
+        // let text = document.querySelector("input").value;
+        todos.push({
+            title: document.querySelector("input").value
+        });
+        render();
+    }
+
+    function deleteTodo(index) {
+        // delete the elements and then render
+        // alert(`Render from delete todo is called for the s.no ${index + 1} i.e. id: ${index}`); // for checking purposes
+        // now we will use the splice function from which we will remove that particular
+        // index and then again render
+        todos.splice(index,1);
+        render();
+    }
+
+    function render() {
+        // everytime we render, before that we should clear the screen first
+        document.getElementById("topDiv").innerHTML = "";
+        for(let i = 0; i < todos.length; i++) {
+            let todo = todos[i];
+            // now creating the span element and the button element 
+            let spanEl = document.createElement("span");
+            let buttonEl = document.createElement("button");
+            // now giving contents to the span and the buttons
+            spanEl.innerHTML = `${i+1}. ${todo.title}`;
+            buttonEl.innerHTML = "Delete";
+            buttonEl.setAttribute("onclick", `deleteTodo(${i})`); // we are keeping the "i" in the deleteTodo function because everytime we render after deleting or inserting the "i" updates accordingly
+            // nwo creating the div element where we need to append these
+            let divEl = document.createElement("div");
+            divEl.appendChild(spanEl);
+            divEl.appendChild(buttonEl);
+            divEl.setAttribute("id", i); // setting the index as the id so that delete becomes easy
+
+            // now appending the divEl to the given div i.e. "topDiv"
+            document.getElementById("topDiv").appendChild(divEl);
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <h4>1. Take Notes</h4>
+    <h4>2. Go out for party</h4>
+    <div>
+        <input type="text"></input>
+        <button>Add Task</button>
+    </div>
+
+    <script>
+        // Creating a stopwatch in the second list element
+        let start = 1;
+        let limit = 25;
+        function stopwatch(end) {
+            if(start <= end) {
+                document.querySelectorAll("h4")[1].innerHTML = start;
+                start++; 
+            }
+            else {
+                clearInterval(stopwatch)
+            }
+        }
+        setInterval(stopwatch, 1000, limit); // IMP: the last arg will act as an arg for the stopwatch function
+        // we will call this function at an interval of 1000 ms till the limit
+    </script>
+</body>
+</html>
+
+<!-- By creating dynamic website we mean that we mean that We can do the following operations in the page:
+    Fetch, Insert, Update, Delete 
+    For the class we will write the script tag in the last of the body tag
+    Because writing in the head tag create some problems
+
+-->

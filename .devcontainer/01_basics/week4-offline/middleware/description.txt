@@ -1,0 +1,38 @@
+https://chatgpt.com/share/68355ab1-7d90-8013-afd8-e545b195ca1b
+
+🔹 What is Express?
+"Express is a routing and middleware web framework that has minimal functionality of its own."
+
+This means Express doesn’t do much by itself — its power comes from middleware functions that handle requests and responses.
+
+🔹 What is Middleware?
+"An Express application is essentially a series of middleware function calls."
+
+Middleware in Express refers to functions that process the request and response objects (req, res) in the application pipeline.
+
+🔹 What Middleware Functions Can Do:
+They are versatile and can:
+
+Execute any code – Run any logic, like logging or authentication checks.
+
+Modify the request or response – Add data to req (e.g., user info) or modify the res (e.g., set headers).
+
+End the request-response cycle – Send a response to the client (res.send(), res.json(), etc.).
+
+Call the next middleware – Pass control to the next middleware using the next() function.
+
+🔹 Key Terms:
+request object (req): Contains details about the client’s request.
+
+response object (res): Used to send data back to the client.
+
+next(): A function used to pass control to the next middleware in the stack.
+
+🧠 Summary
+Middleware is the core building block of Express. Each middleware function processes incoming requests in a chain, deciding whether to:
+act on the request,
+pass it along,
+or end the cycle.
+
+🔗 Learn more: https://expressjs.com/en/guide/using-middleware.html
+

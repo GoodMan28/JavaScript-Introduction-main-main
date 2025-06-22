@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="3del.css" rel="stylesheet"/>
+</head>
+
+<body>
+  <h1>Todo list</h1>
+  <div>
+    <div id="todo-1">
+      <h4>1. Take class</h4>
+      <button onclick="deleteTask(1)">delete</button>
+    </div>
+    <div id="todo-2">
+      <h4>2. Go out to eat</h4>
+      <button onclick="deleteTask(2)">delete</button>
+    </div>
+  </div>
+  <div>
+    <input type="text"></input>
+    <button>Add Todo</button>
+  </div>
+</body>
+
+<script>
+    function deleteTask(idNum) {
+      let delItem = document.getElementById(`todo-${idNum}`); // getting that element which we need to delete
+      delItem.parentElement.removeChild(delItem); // selecting the parent element of delItem and then remove the child of that parent item
+    }
+</script>
+
+</html>

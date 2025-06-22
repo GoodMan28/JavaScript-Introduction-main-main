@@ -1,0 +1,33 @@
+<html>
+    <body>
+        <div id="todoContainer">
+
+        </div>
+        <div><input placeholder="Type Here!" type="text"></input>
+            <button onclick="addTodo()">Add Todo</button>
+        </div>
+        
+        <!-- We will add elements here -->
+    </body>
+
+    <script>
+        let cnt = 1;
+        function addTodo() {
+            // getting the text
+            let text = document.querySelector("input").value;
+            // making the element
+            let element = document.createElement("div");
+            element.setAttribute("id",cnt);
+            element.innerHTML = `<div class="text-button" style="display:flex">
+                <div>${text}</div> <button onclick="deleteTodo(${cnt})">Delete todo</button>
+                </div>`
+            document.querySelector("body").appendChild(element);
+            cnt++;
+        }
+        function deleteTodo(idNum) {
+            // first selecting the div to delete
+            let delElement = document.getElementById(`${idNum}`);
+            delElement.parentElement.removeChild(delElement);
+        }
+    </script>
+</html>

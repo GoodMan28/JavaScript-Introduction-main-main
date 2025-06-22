@@ -1,0 +1,86 @@
+Great question — you're exploring the core of how data flows between **servers** and **clients** in web apps. Let's break down the **difference between `JSON.parse()`, `JSON.stringify()` and `response.json()`** (not `response.parse()`, which doesn’t exist).
+
+---
+
+### 🔷 1. `JSON.stringify()`
+
+> Converts a **JavaScript object** into a **JSON string**.
+
+#### 🔧 Usage:
+
+* Used **before sending data** to the server (e.g., in a POST request).
+* Or for saving to storage (e.g., `localStorage`).
+
+#### ✅ Example:
+
+```js
+const obj = { name: "John", age: 30 };
+const jsonString = JSON.stringify(obj);
+console.log(jsonString); // '{"name":"John","age":30}'
+```
+
+---
+
+### 🔶 2. `JSON.parse()`
+
+> Converts a **JSON string** into a **JavaScript object**.
+
+#### 🔧 Usage:
+
+* Used **after receiving** a stringified JSON (e.g., from a server or from storage).
+
+#### ✅ Example:
+
+```js
+const jsonString = '{"name":"John","age":30}';
+const obj = JSON.parse(jsonString);
+console.log(obj.name); // 'John'
+```
+
+---
+
+### 🔷 3. `response.json()` (not `response.parse()`)
+
+> A method on the **`Response` object** returned by `fetch()`
+> It reads the raw body and **parses it into a JS object** using `JSON.parse()` internally.
+
+#### ✅ Example:
+
+```js
+fetch('/api/user')
+  .then(response => response.json()) // uses JSON.parse internally
+  .then(data => {
+    console.log(data.name);
+  });
+```
+
+#### 🔍 What actually happens:
+
+```js
+// Equivalent of what .json() does under the hood
+fetch('/api/user')
+  .then(res => res.text())             // Step 1: get raw text
+  .then(txt => JSON.parse(txt));       // Step 2: parse JSON string to object
+```
+
+---
+
+### ✅ Summary Table:
+
+| Function           | Input             | Output              | Purpose                              |
+| ------------------ | ----------------- | ------------------- | ------------------------------------ |
+| `JSON.stringify()` | JavaScript Object | JSON String         | To send/store data                   |
+| `JSON.parse()`     | JSON String       | JavaScript Object   | To read/use data                     |
+| `response.json()`  | Raw HTTP response | Promise → JS Object | To **read + parse** JSON from server |
+
+---
+
+### 🚨 Note:
+
+There is **no `response.parse()`** function in the Fetch API. The correct method to get JSON from a response is:
+
+```js
+response.json()
+```
+
+Let me know if you'd like a visual example or want to compare this with `axios`!

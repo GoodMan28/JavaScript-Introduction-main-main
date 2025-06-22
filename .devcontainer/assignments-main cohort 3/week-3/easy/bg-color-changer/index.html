@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bg-color-changer</title>
+    <style>
+        body {
+        margin: 0;
+        height: 100vh; /* Full viewport height */
+        display: flex;
+        justify-content: center; /* center horizontally */
+        align-items: end;     /* center vertically */
+    }
+
+    .button-panel {
+        padding: 5%;
+        display: flex;
+        gap: 10px; /* optional: adds spacing between buttons */
+        background-color: beige;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="button-panel">
+        <div class="red"><button style="color:white; background-color: red;" onclick="changeColor('red')">Red</button></div>
+        <div class="blue"><button style="color: white; background-color: blue;" onclick="changeColor('blue')">Blue</button></div>
+        <div class="green"><button style="color: white; background-color: green;" onclick="changeColor('green')">Green</button></div>
+        <div class="yellow"><button style="color: black; background-color: yellow;" onclick="changeColor('yellow')">Yellow</button></div>
+    </div>
+</body>
+<script>
+    function changeColor(color) {
+        document.body.style.backgroundColor = color;
+    }
+</script>
+</html>

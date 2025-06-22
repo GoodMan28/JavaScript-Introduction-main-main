@@ -1,0 +1,8 @@
+The username is encode to the JWT when we sign in
+The opposite happens when we hit the /me EP
+
+Here in jwt we dont need to lookup for the username into the DB after the user hits /me EP.
+
+We still have to lookup for different data into the DB.
+But the auth work for checking whether the username is present into the DB is avoided.
+We can directly decode the username from the token

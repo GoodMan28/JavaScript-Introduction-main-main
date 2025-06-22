@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <div id="topDiv">
+            Hi There
+        </div>
+    </body>
+
+    
+    <script>
+        // first adding an element
+        let element = document.createElement("div");
+        element.setAttribute("id","nextDiv");
+        element.innerHTML = "Hello this is Abhineet";
+        // now appending it to the parent
+        document.getElementById("topDiv").appendChild(element); // here the next div will be appended inside the topDiv as a child
+    </script>
+    
+</html>

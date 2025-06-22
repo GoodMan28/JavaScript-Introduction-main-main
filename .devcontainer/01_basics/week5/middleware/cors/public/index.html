@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <input id="1" type="text" placeholder="Enter first Number"></input>
+    <input id="2" type="text" placeholder="Enter second Number"></input>
+    <br>
+    <button onclick="sendRequest()">Hit the API endpoint</button>
+    <script>
+        // here since we are passing a and b to the body 
+        // and the http server will take the inputs from the body
+        // and perform the sum
+        function sendRequest() {
+            let a = Number(document.getElementById("1").value);
+            let b = Number(document.getElementById("2").value);
+
+            axios.post("http://localhost:3002/add", {
+                a: a,
+                b: b
+            }); // here we passed the values to the backend server
+        }
+    </script>
+</body>
+</html>

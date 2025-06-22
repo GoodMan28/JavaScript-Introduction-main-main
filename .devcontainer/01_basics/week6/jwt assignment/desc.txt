@@ -1,0 +1,55 @@
+Can you try creating a middleware called auth that verifies if a user is logged in and 
+ends the request early if the user isn’t logged in?
+
+Thought process: If the token is valid then the user is logged in 
+else the user is not logged in then we will end the http req
+
+We will place this middleware in the /me EP where we can end the req when we found out that the token is incorrect
+
+
+
+// writing the 3 EP from scratch then we will make an auth middleware
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+app.get("/me", (req, res) => {
+    let token = req.headers.authorization;
+    if(token) {
+        // verifying the token
+        let decodedPayload = jwt.verify(token, JWT_SECRET);
+        // finding the user with the token
+        // initially what we were doing was that, we compared the username decoded with the username present in the DB. 
+        // but this also gave the user with the token inactive. Hence the token invalidation of the older tokens is not happening
+        // so we will compare with the present token. i.e. we will also match the latest token present in the DB along with the 
+        // For the concept of stateless and stateful Refer this: https://chatgpt.com/share/684b0c97-475c-8013-8a7f-ceef3deb61e5
+        
+        // Hybrid method: Helps invalidate old tokens on login, something JWT alone doesn't do.
+        let user = null;
+        user = users.find(u => {
+            if(u.token === token && u.username === decodedPayload.username) return true;
+            return false;
+        })
+        if(user) {
+            // user is found
+            return res.json({
+                "msg": "The user is found",
+                "username": user.username,
+                "token": user.token
+            })
+        }
+        else {
+            return res.status(404).json({
+                "msg": "The user is not found",
+                token
+            })
+        }
+    }
+    else {
+        res.status(404).json({
+            "msg": "Provide the token: authorization header empty"
+        })
+    }
+})
+
+app.listen(3002);

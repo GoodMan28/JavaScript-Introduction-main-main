@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<script>
+    async function signup() {
+        let username = document.getElementById("su-uname").value;
+        let password = document.getElementById("su-pass").value;
+        let name = document.getElementById("su-name").value;
+
+        try{
+            let response = await axios.post("http://localhost:3002/signup", {
+                "username": username,
+                "password": password,
+                "name": name
+            })
+            alert(response.data.msg);
+        }
+        catch(err) {
+            if(err.response) {
+                // error given by the server either into the 4XX/5XX series
+                alert(err.response.data.msg);
+            }
+            else {
+                alert("error is "+ err);
+            }
+        }
+    }
+
+    async function signin() {
+        let username = document.getElementById("si-uname").value;
+        let password = document.getElementById("si-pass").value;
+        try {
+            let response = await axios.post("http://localhost:3002/signin", {
+                "username": username,
+                "password": password
+            })
+            localStorage.setItem("token", response.data.token);
+            alert("The user is signed in")
+            // printing the name of the user here
+            getUserInfo(); // in this function we will fetch all the user info
+        }
+        catch(err) {
+            if(err.response) {
+                alert(err.response.data.msg);
+            }
+            else {
+                alert(err.message);
+            }
+        }
+    }
+
+    async function getUserInfo() {
+        // deleting the signup section
+        let ele = document.getElementById("signup")
+        document.querySelector("body").removeChild(ele);
+
+        try {
+            let response = await axios.get("http://localhost:3002/me", {
+                headers: {
+                    token: localStorage.getItem("token")
+                }
+            })
+            document.getElementById("greetings").innerHTML = `Hello ${response.data.name}! Time to grind`
+        }
+        catch(err) {
+            alert(err.response.data.msg)
+        }
+    }
+</script>
+<body>
+    <div id="signup">
+        <h3>Signup</h3>
+        <input type="text" placeholder="Enter your username" id="su-uname"></input>
+        <input type="text" placeholder="Enter your password" id="su-pass"></input>
+        <input type="text" placeholder="Enter your name" id="su-name"></input>
+        <button onclick="signup()">Sign-up</button>
+    </div>
+    <div id="greetings"></div>
+    <div id="signin">
+        <h3>Signin</h3>
+        <input type="text" placeholder="Enter your username" id="si-uname"></input>
+        <input type="text" placeholder="Enter your password" id="si-pass"></input>
+        <button onclick="signin()">Sign-in</button>
+    </div>
+</body>
+</html>

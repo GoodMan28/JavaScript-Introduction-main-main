@@ -1,0 +1,6 @@
+Axios is an external library that help us to write HTTP clients.
+Initially we wrote two different lines to get the response and then converting the response into the json
+
+In axios it converts the response into JSON automatically into a member variable called data
+
+We do not need to require it becuase we use it in html. So we rather use the link into the src tag of script into the head tag

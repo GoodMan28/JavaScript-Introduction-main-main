@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="inputEl">
+        <input type="text"></input>
+        <button onclick="addTodo()">Add todo</button>
+    </div>
+</body>
+<script>
+    let cnt = 1;
+    function addTodo() {
+        let text = document.querySelector("input").value;
+
+        //// Here first we create a span element, Then we create a button element and then append both one by one to a div 
+        // element and then finally append that div to the body
+        let spanEl = document.createElement("span"); // the JS will create <span></span> to which we can easily put any innerHTML
+        let buttonEl = document.createElement("button"); // the JS will create an empty button element <button></button>
+
+        let divEl = document.createElement("div");
+        spanEl.innerHTML = text;
+        buttonEl.innerHTML = "Delete Todo";
+        buttonEl.setAttribute("onclick", `deleteTodo(${cnt})`) // setting the attribute to the button so that delete becomes easy
+        // appending the span and button to the divEl
+        divEl.appendChild(spanEl);
+        divEl.appendChild(buttonEl);
+        divEl.setAttribute("id", cnt); // setting attribute to the div element so that we can find it and delete it
+        // appending the divEl to the body
+        cnt++;
+        document.querySelector("body").appendChild(divEl);
+    }
+    function deleteTodo(idNum) {
+        // selecting the div with the id num
+        let delElement = document.getElementById(idNum)
+        delElement.parentElement.removeChild(delElement);
+    }
+    
+
+    
+</script>
+</html>

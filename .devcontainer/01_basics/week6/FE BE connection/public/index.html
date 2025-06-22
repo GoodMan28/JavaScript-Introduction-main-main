@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FE BE Connect</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<script>
+    async function signup() {
+        // we will be extracting the credentials and then making a post request with the help of axios
+        let username = document.getElementById("su-un").value;
+        let password = document.getElementById("su-pass").value;
+
+        try {
+            let response = await axios.post("http://localhost:3002/signup", {
+                "username": username,
+                "password": password
+            })
+            // here we will compare the status codes before we give any alert
+            alert("You are signed up")
+        }
+        catch(err) {
+            if(err.response) {
+                let status = err.response.status;
+                alert(err.response.data.msg)
+            }
+            else {
+                alert(err);
+            }
+        }
+    }
+
+    async function signin() {
+
+        let username = document.getElementById("si-un").value;
+        let password = document.getElementById("si-pass").value;
+
+        try {
+            let response = await axios.post("http://localhost:3002/signin", {
+                "username": username,
+                "password": password
+            })
+            let token = response.data.token; 
+            // now we will store this token in the Local storage so that the user information is retained until we login a new
+            localStorage.setItem("token", token);
+
+            getUserInfo();
+            alert("You are signed in");
+            // Conditionally showing the sign up section
+            let ele = document.getElementById("signup");
+            ele.parentElement.removeChild(ele);
+        }
+        catch(err) {
+            if(err.response) {
+                // error from the server side 4XX/5XX series
+                let status = err.response.status;
+                alert(err.response.data.msg)
+            }
+            else {
+                alert(`${err}`);
+            }
+        }
+    }
+
+    async function getUserInfo() {
+        try{
+            let response = await axios.get("http://localhost:3002/me", {
+                headers: {
+                    authorization: localStorage.getItem("token")
+                }
+            })
+            alert(response.data.msg);
+            document.getElementById("info").innerHTML = "Username: " + response.data.username;
+        }
+        catch(err) {
+            if(err.response) {
+                let status = err.response.status;
+                alert(err.response.data.msg);
+            }
+            else {
+                alert(err);
+            }
+        }
+    }
+    
+    
+
+    async function logout() {
+        // adding the signin div so that we can sign in again
+        // first making the inner html of the info div empty so that the accidental addition of the sign up be prevented
+        document.getElementById("signup-parent").innerHTML = ``;
+        alert("Logged Out")
+        // now adding the signup element
+        let addend = `<div id="signup">Sign-up: 
+            <input type="text" placeholder="Username" id="su-un"></input>
+            <input type="text" placeholder="Password" id="su-pass"></input>
+            <button onclick="signup()">Sign Up</button>
+        </div>`;
+        document.getElementById("signup-parent").innerHTML = addend;
+
+        // we will simply delete the token from the local storage
+        localStorage.removeItem("token");
+        document.getElementById("info").innerHTML = `No user logged in`;
+    }
+
+    // It’s a browser event handler that runs once the entire HTML page, stylesheets, images, scripts, etc. are fully loaded.
+    window.onload = async function () {
+        let token = localStorage.getItem("token");
+        if (token) {
+            try {
+                let response = await axios.get("http://localhost:3002/me", {
+                    headers: {
+                        authorization: token
+                    }
+                })
+                alert(response.data.msg);
+                document.getElementById("info").innerHTML = response.data.username;
+            }
+            catch(err) {
+                if(err.response) {
+                    alert(err.response.data.msg);
+                }
+                else {
+                    alert(err);
+                }
+            }
+        } else {
+            document.getElementById("info").innerHTML = "No user logged in";
+        }
+    };
+    // For more info: Refer last 3 chats of: https://chatgpt.com/share/684ddcfb-c0d4-8013-86c3-f0598b73ec73
+</script>
+
+<body>
+    <div id="signup-parent">
+        <div id="signup">Sign-up: 
+            <input type="text" placeholder="Username" id="su-un"></input>
+            <input type="text" placeholder="Password" id="su-pass"></input>
+            <button onclick="signup()">Sign Up</button>
+        </div>
+    </div>
+    
+    <div id="signin-parent">
+        <div id="signin">Sign-in: 
+            <input type="text" placeholder="Username" id="si-un"></input>
+            <input type="text" placeholder="Password" id="si-pass"></input>
+            <button onclick="signin()">Sign In</button>
+        </div>
+    </div>
+
+    <div id="info-div">
+        <div id="information">
+            Information: <div id="info"></div>
+        </div>
+    </div>
+
+    <div id="logout-parent">
+        <div id="logout">
+            <button onclick="logout()">Log-out</button>
+        </div>
+    </div>
+
+    </div>
+</body>
+</html>

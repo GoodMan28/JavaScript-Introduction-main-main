@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h2>LinkedIn</h2>
+    <div>
+
+    </div>
+    <script>
+        // Theory:
+        // You, as the dev, write a server that handles both UI and API routes. 
+        // Then, using fetch() in the frontend JavaScript, 
+        // you make background requests to those API routes and render the results — without reloading the page
+
+
+        // rendering the json title into the div using the fetch api
+        async function getRecentPost() {
+            let response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+            // let data = JSON.parse(response); // converts the JSON into the object  
+            // this is wrong because: 
+            // response is not a JSON string — it's a Response object returned by fetch().
+            // You can’t directly use JSON.parse() on it.
+
+            // use this instead:
+            let data = await response.json(); // internally it convertes the response object to the usable JS object
+            document.querySelector("div").innerHTML = data.title;   
+        }
+
+        getRecentPost();
+
+        // fetch("https://jsonplaceholder.typicode.com/todos/1");
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!-- Method 2
+fetch('/api/user')
+    .then(response => response.text())  // now the text is being passed to the text variable internally
+    .then(text => JSON.parse(text))   // likewise we pass the object to the user variable internally
+    .then(user => {
+    console.log(user.name); // ← Accessed in the final then()
+});
+
+Details:
+    In this version:
+
+    text is the raw string
+
+    JSON.parse(text) returns the object
+
+    That object gets passed as user into the final .then()
+ 
+-->
