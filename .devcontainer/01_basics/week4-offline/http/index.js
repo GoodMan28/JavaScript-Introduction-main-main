@@ -3,7 +3,7 @@ import express from "express"
 const app = express()
 const app1 = express()
 function sum(n) {
-    let ans = (n*(n+1))/2
+    let ans = (n*(n+1))/2;
     return ans;
 }
 app.get('/', function (req, res) {
