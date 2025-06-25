@@ -1,7 +1,7 @@
 import express from "express"
 import jwt from "jsonwebtoken"
 let app = express();
-let JWT_SECRET = "ABHINEET_LOVES_LUCY_ADAH_TASHI_WAMIQA"
+let JWT_SECRET = "ABHINEET_LOVES_ADAH_WAMIQA"
 let users = []; // in memory variable that will store the username, password, and token(which will be generated after the sign-in so that the user can access all the contents)
 app.use(express.json()); // for parsing the body
 
