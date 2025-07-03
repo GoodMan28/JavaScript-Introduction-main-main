@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- this is the parent of the button elements where the JS will inject the button -->
+    <div id="btnParent">
+    </div>
+    <script>
+        // state variable
+        let state = {
+            count: 0,
+            color: "red"
+        };
+
+        // this is the on-click event WHERE we update the STATE variable
+        function onButtonPress() {
+            // state variable updation
+            state.count++;
+            if(state.color == "red") {
+                state.color = "blue";
+            }
+            else {
+                state.color = "red";
+            }
+            counterReRender(); // the re-render is called which will update the changes the changes made in the state into the components i.e. the button element
+        }
+
+        // this is the re-render function WHICH will be given by the react in future
+        function counterReRender() {
+            document.getElementById("btnParent").innerHTML = ""; // Makes sure that there is no element in the button parent div
+            let component = getButtonElement(state.count, state.color); // this will give the button component and we will append the new component to the button parent div
+            document.getElementById("btnParent").appendChild(component); // this appends the component to the parent
+        }
+
+        // this will create the component(how will the dom will get manipulated or new HTML snippets will be provided) this comes under the COMPONENT part
+        function getButtonElement(count, color) {
+            let buttonContent = `Counter ${count}`;
+            let component = document.createElement("button");
+            component.innerHTML = `Counter ${count}`
+            component.setAttribute("onclick", "onButtonPress()");
+            component.setAttribute("style", `background-color: ${color}; color: white`)
+            return component;
+        }
+
+        // injecting the first counter button using the re-render function
+        counterReRender();
+    </script>
+</body>
+</html>

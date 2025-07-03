@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function addCounter() {
+        let counterContent = document.getElementById("btn").innerHTML;
+        let newcounterValue = Number((counterContent.split(" "))[1]) + 1;
+        // updating the innerHTML of the button after the click
+        document.getElementById("btn").innerHTML = `Counter ${newcounterValue}`
+    }
+</script>
+<body>
+    <button id="btn" onclick="addCounter()">Counter 4</button>
+</body>
+</html>
