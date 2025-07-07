@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "regex": "cpp"
     },
     "livePreview.defaultPreviewPath": "/.devcontainer/portfolio/index.html"
 }
