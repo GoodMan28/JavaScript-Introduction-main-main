@@ -34,5 +34,3 @@ function Counter() {
     </div>
   );
 }
-
-// we have created a fresh counter using the useEffect hook in App2.jsx

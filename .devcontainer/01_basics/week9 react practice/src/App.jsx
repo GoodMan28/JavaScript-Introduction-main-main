@@ -41,4 +41,4 @@ function Counter() {
   );
 }
 
-// we have created a fresh counter using the useEffect hook in App2.jsx
+// we have created a fresh counter using the useEffect hook in App2.jsx using setInterval
