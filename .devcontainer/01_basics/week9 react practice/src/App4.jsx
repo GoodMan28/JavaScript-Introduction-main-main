@@ -1,7 +1,7 @@
 // Here we will be learning about the dependency array
 // Also revising the Cleanup, useEffect and Conditonal Rendering (CR)
 
-import { useState,useEffect, use } from "react";
+import { useState,useEffect } from "react";
 
 export default function App() {
     // let [count, setCount] = useState(0);

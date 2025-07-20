@@ -30,6 +30,7 @@ export default function App() {
     return (
         <div>
             {counterVisible ? <Counter count={count} setCount={setCount}></Counter> : null}
+            {/* so that when the counter component is visible for 5 seconds then only increase the timer */}
         </div>
     );
 }

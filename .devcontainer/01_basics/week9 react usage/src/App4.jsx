@@ -9,7 +9,7 @@ export default function App() {
     let [loading, setLoading] = useState(true)
     // whenever the current todo changes the api request needs to be sent, hence we put the "todo" state in our dependency array
     useEffect(() => {
-        async function addTodo() {
+        async function getTodo() {
             // send backend request when the current tab is called
             setLoading(true);
             let response = await fetch("https://jsonplaceholder.typicode.com/todos/" + todo) // we get the response object 
@@ -19,7 +19,7 @@ export default function App() {
             setTodoData(data.title)
         }
          
-        addTodo(); // because this will take some time since this is an async function
+        getTodo(); // because this will take some time since this is an async function
         
     }, [todo])
 
