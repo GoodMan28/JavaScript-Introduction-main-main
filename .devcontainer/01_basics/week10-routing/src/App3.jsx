@@ -17,9 +17,9 @@ export default function App() {
 
     return (
         <>
-            <input ref={inputRef} placeholder="Enter name"></input>
+            <input ref={inputRef} placeholder="Enter Name"></input>
             <input placeholder="Enter roll"></input>
-            <button onClick={doFocus}>Focus on name</button>
+            <button style={{cursor: "pointer"}} onClick={doFocus}>Focus on name</button>
         </>
     );
 }
