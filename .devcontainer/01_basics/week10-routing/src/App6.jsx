@@ -11,7 +11,11 @@ function Chat() {
     setMessages((prevMessages) => [...prevMessages, "New message!"]);
   };
 
-  // Scroll to the bottom whenever a new message is added
+  // Scroll to the bottom whenever a new message is added 
+  // scrollTop: How far is the content from the top
+  // scrollHeight: What is the height of the box
+
+  // So it sets the scrollTop = scrollHeight i.e. it puts the contents in the last whenever the messages are added
   useEffect(() => {
     chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
   }, [messages]);
