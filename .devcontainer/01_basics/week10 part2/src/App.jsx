@@ -52,4 +52,4 @@ function ToggleBulbstate({ setBulbOn }) {
 // This makes the code less optimal and maintainence very difficult
 
 // This process is called prop drilling
-// To overcome this we will use the concept of Context Ap
+// To overcome this we will use the concept of Context Api
