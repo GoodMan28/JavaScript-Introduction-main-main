@@ -20,7 +20,6 @@ let FileName = program.args[0];
 // resolving the filepath if the file exists out of this directory
 FileName = path.resolve(FileName);
 console.log(FileName);
-
 fs.readFile(FileName, "utf-8", function (err, data) {
     if(err) {
         console.log("There's some error in the file");
@@ -28,7 +27,7 @@ fs.readFile(FileName, "utf-8", function (err, data) {
     else {
         console.log("The number of words in the file is:");
         // console.log(data); For debugging purposes
-        console.log(data.split(/[,.?! ]+/).filter(Boolean).length); // represented the delimeter in the form of regex
+        console.log(data.split(/[,.?! \n]+/).filter(Boolean).length); // represented the delimeter in the form of regex
     }
 });
 

@@ -2,7 +2,7 @@ function run() {
     console.log("I will run");
 }
 
-setTimeout(run, 5000); // setTimeout is another asynchronous function that executes a certain code after some time
+setTimeout(run, 1); // setTimeout is another asynchronous function that executes a certain code after some time
 // The setTimeout function will take function as an arg (callback)
 // and it will call the function after 5000 ms = 5 s
 
@@ -14,7 +14,7 @@ console.log("It is a normal log statement and will execute the first");
  // This can be run even before all the statements above
 // since all the tasks are I/O bound tasks and take a few time to run (i.e. read a file)
 sum = 0;
-for(i = 0; i < 5; i++) {
+for(i = 0; i < 1000000; i++) {
     sum++;
 }
 console.log(sum);

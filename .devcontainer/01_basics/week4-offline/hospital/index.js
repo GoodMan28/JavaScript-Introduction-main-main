@@ -58,7 +58,7 @@ app.post('/', (req, res) => {
     res.json({
         "msg": "job done!" // we can check whether it is inserted 
     })
-    // confirmation to the user since her doesn't need the kidney data
+    // confirmation to the user since he doesn't need the kidney data
 })
 
 // updating kidney with damaged ones
