@@ -3,6 +3,14 @@
 import { useEffect, useState, memo } from "react";
 
 export default function App() {
+    return (
+        <div>
+            <Counter />
+        </div>
+    );
+}
+
+function Counter() {
     let [count, setCount,] = useState(0);
 
     useEffect(() => {
@@ -12,18 +20,20 @@ export default function App() {
     }, [])
 
     return <>
-        <MemoizedCurrentCount />
+        <MemoizedCurrentCount count={count}/>
         <MemoizedIncrease />
         <MemoizedDecrease />
     </>
 }
 
-let MemoizedCurrentCount = memo(function () {
+let MemoizedCurrentCount = memo(function (props) {
     console.log("MemoizedCurrentCount RE-RENDERED 1");
     
     return (
         <div>
             1
+            {/* {props.count} */}
+            {/* Now since we have passed the state as the prop so it will re-render */}
         </div>
     );
 })
