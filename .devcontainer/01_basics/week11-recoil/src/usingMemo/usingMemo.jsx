@@ -31,8 +31,8 @@ let MemoizedCurrentCount = memo(function (props) {
     
     return (
         <div>
-            1
-            {/* {props.count} */}
+            {/* 1 */}
+            {props.count}
             {/* Now since we have passed the state as the prop so it will re-render */}
         </div>
     );
