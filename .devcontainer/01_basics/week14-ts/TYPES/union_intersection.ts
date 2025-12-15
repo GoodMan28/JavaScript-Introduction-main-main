@@ -30,5 +30,3 @@ let user2: new_user = {
 }
 
 console.log(user2.warning);
-
-
