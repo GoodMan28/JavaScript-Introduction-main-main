@@ -12,6 +12,7 @@ function App() {
   }
 
   useEffect(() => {
+    // hit the websocket server and then set the socket state variable to the websocket object
     let ws = new WebSocket("ws://localhost:8080");  
     setSocket(ws);
 
