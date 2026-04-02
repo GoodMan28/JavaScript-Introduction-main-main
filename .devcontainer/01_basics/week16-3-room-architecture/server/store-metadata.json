@@ -1,0 +1,6 @@
+{
+    "roomId": {
+        "limit": "type<number>",
+        "socket_connections": "[] of socket connections"
+    }
+}
