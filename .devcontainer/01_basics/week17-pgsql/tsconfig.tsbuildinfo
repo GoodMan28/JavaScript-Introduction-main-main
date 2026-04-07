@@ -1,1 +1,1 @@
-{"root":["./src/db.ts","./src/init-db.ts"],"version":"6.0.2"}
+{"root":["./src/db.ts","./src/init-db.ts","./src/controllers/todocontroller.ts","./src/routes/todoroutes.ts"],"version":"6.0.2"}

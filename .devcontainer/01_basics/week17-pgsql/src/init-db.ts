@@ -1,5 +1,7 @@
 import { connectDB, client } from "./db.js";
-
+import express from "express";
+import todoRouter from "./routes/todoRoutes.js";
+const app = express();
 const createTableQuery = `
     CREATE TABLE IF NOT EXISTS todos (
         id SERIAL PRIMARY KEY,
@@ -22,3 +24,9 @@ const bootStrap = async () => {
 }
 
 await bootStrap();
+
+app.use("/api/v1/todo", todoRouter);
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});
