@@ -17,6 +17,8 @@ export const addTodo = async (req: Request, res: Response): Promise<void> => {
             [todoName.trim()]
         );
         res.status(201).json({ message: "Todo created successfully.", todo: result.rows[0] });
+        console.log(result);
+        
     } catch (err) {
         console.error("Error in addTodo:", err);
         res.status(500).json({ error: "Internal server error while creating todo." });
